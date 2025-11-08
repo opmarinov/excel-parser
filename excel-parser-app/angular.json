@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/excel-parser",
+            "outputPath": "dist/excel-parser-app",
             "baseHref": "/excel-parser/",
             "index": "src/index.html",
             "browser": "src/main.ts",
