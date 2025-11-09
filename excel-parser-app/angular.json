@@ -25,7 +25,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/main.scss"
             ],
             "server": "src/main.server.ts",
             "outputMode": "server",

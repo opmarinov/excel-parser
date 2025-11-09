@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:excel-parser-app": "node dist/excel-parser-app/server/server.mjs",
-    "deploy": "ng build --configuration production --base-href /excel-parser/ && npx angular-cli-ghpages --dir=dist/excel-parser-app --branch=gh-pages"
+    "deploy": "ng build --configuration production --base-href /excel-parser/ && npx angular-cli-ghpages --dir=dist\\excel-parser-app\\browser --branch=gh-pages"
   },
   "prettier": {
     "printWidth": 100,
@@ -24,17 +24,22 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^20.2.12",
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
     "@angular/core": "^20.3.0",
-    "@angular/forms": "^20.3.0",
+    "@angular/forms": "^20.3.10",
+    "@angular/material": "^20.2.12",
     "@angular/platform-browser": "^20.3.0",
     "@angular/platform-server": "^20.3.0",
     "@angular/router": "^20.3.0",
     "@angular/ssr": "^20.3.9",
+    "exceljs": "^4.4.0",
     "express": "^5.1.0",
+    "file-saver": "^2.0.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
@@ -42,6 +47,7 @@
     "@angular/cli": "^20.3.9",
     "@angular/compiler-cli": "^20.3.0",
     "@types/express": "^5.0.1",
+    "@types/file-saver": "^2.0.7",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.17.19",
     "angular-cli-ghpages": "^2.0.3",

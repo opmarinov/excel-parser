@@ -1,0 +1,114 @@
+<div class="margin-top-bottom-20">
+    <mat-card appearance="outlined" class="padding-20">
+        <div class="row space-between">
+            <input type="file" (change)="upload($event)" #fileUpload>
+
+            @if(isDataReady) {
+            <button matButton="filled" (click)="export()">
+                <mat-icon>download</mat-icon>
+                Export
+            </button>
+            }
+        </div>
+    </mat-card>
+</div>
+
+@if(isDataReady) {
+<div class="col margin-top-bottom-20">
+    <div class="row">
+        <mat-card appearance="outlined" class="padding-20 width-max">
+            <div class="row">
+                <input class="width-max" type="text" placeholder="Search names separated by comma and space..." [value]="searchText" (input)="searchText = $event.target.value">
+                
+                <div class="space-10"></div>
+                
+                <button matButton="filled" (click)="filterByText()"> Search <mat-icon> search </mat-icon> </button>
+            </div>
+        </mat-card>
+    </div>
+
+    <div class="space-10"></div>
+
+    <!-- Table and Filters -->
+    <div class="row">
+        <!-- Table -->
+        <mat-card appearance="outlined" class="padding-20">
+            <div class="row height-100-px space-between center-content">
+                <mat-card-title>
+                    Schedules
+                </mat-card-title>
+
+                <div class="row">
+                    <button matButton="filled" (click)="reset()">
+                        <mat-icon>refresh</mat-icon>
+                        Reset filters
+                    </button>
+                </div>
+            </div>
+
+            <div class="space-10"></div>
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <!-- Dynamic column generation -->
+                @for (column of displayedColumns; track column) {
+                <ng-container [matColumnDef]="column">
+                    <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+                    <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+                </ng-container>
+                }
+
+                <!-- Header and Row definitions -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+
+        </mat-card>
+
+        <div class="space-10"></div>
+
+        <!-- Filters -->
+        <div class="col width-20-per">
+
+            <!-- Filter dates -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Dates filter </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="col">
+                    @for(checkbox of dates; track checkbox) {
+                    <mat-checkbox [checked]="checkbox.checked" (change)="filterByDates(checkbox)">
+                        {{checkbox.title}}
+                    </mat-checkbox>
+                    }
+                </div>
+            </mat-expansion-panel>
+
+            <div class="space-10"></div>
+
+            <!-- Filter names -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Names filter </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="col scroll-filter">
+                    @for(checkbox of names; track checkbox) {
+                    <mat-checkbox [checked]="checkbox.checked" (change)="filterByName(checkbox)">
+                        {{checkbox.title}}
+                    </mat-checkbox>
+                    }
+                </div>
+            </mat-expansion-panel>
+
+        </div>
+    </div>
+</div>
+}
+@else {
+<mat-card appearance="outlined">
+    <div class="col center-content height-max justify-content-center">
+        <mat-icon class="not-uploaded">description</mat-icon>
+        <p> Please upload an excel file </p>
+    </div>
+</mat-card>
+}
